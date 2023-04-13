@@ -2,6 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\EnderecoController;
+use App\Models\Endereco;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('clientes', ClienteController::class);
+Route::get('clientes-search', [ClienteController::class, 'search']);
+Route::get('/cidades/{estado}', [EnderecoController::class, 'getCidadesPorEstado']);
+Route::get('/estados', [EnderecoController::class, 'getEstados']);
